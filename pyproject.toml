@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mmdet"
+version = "3.3.0-custom"
+description = "Custom MMDetection"
+requires-python = ">=3.8"
+
+dependencies = [
+    "torch>=1.10",
+    "mmengine>=0.7.0",
+    "mmcv>=2.0.0",
+    "numpy",
+    "pyyaml",
+    "tqdm",
+    "opencv-python",
+    "pycocotools",
+    "terminaltables",
+    "prettytable"
+]
+
+[tool.setuptools]
+packages = ["mmdet"]
