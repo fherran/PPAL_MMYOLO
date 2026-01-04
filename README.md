@@ -35,9 +35,8 @@ git clone https://github.com/fherran/PPAL_MMYOLO.git # Clone PPAL_MMYOLO
 ### 📚 Install OpenMMLab Core Dependencies
 ```shell
 pip install openmim
-mim install "mmcv==2.01"
-mim install "mmengine==0.6.0"
-mim install "mmdet==3.3.0"
+mim install "mmcv==2.0.1"
+mim install "mmengine==0.10.7"
 ```
 
 ---
@@ -51,16 +50,32 @@ pip install -r requirements/albu.txt # For albumentations
 
 mim install -v -e . # Install mmyolo
 ```
+You need to copy the custom yolo hooks via this command:
+```bash
+cp yolo_custom_hooks/yolo_style_metrics_hook.py mmyolo/mmyolo/engine/hooks/
+```
+And update the python code mmyolo/mmyolo/engine/hooks/__init__.py as follwos:
+```shell
+# Copyright (c) OpenMMLab. All rights reserved.
+from .ppyoloe_param_scheduler_hook import PPYOLOEParamSchedulerHook
+from .switch_to_deploy_hook import SwitchToDeployHook
+from .yolo_style_metrics_hook import YoloStyleMetricsHook # Newly added
+from .yolov5_param_scheduler_hook import YOLOv5ParamSchedulerHook
+from .yolox_mode_switch_hook import YOLOXModeSwitchHook
+
+__all__ = [
+    'YOLOv5ParamSchedulerHook', 'YOLOXModeSwitchHook', 'SwitchToDeployHook',
+    'PPYOLOEParamSchedulerHook', 'YoloStyleMetricsHook'
+]
+```
 
 ---
 
-### + Extra Step
-You need to install the depnedicies from this repo.
-
+### Install Custom MMDET
 ```shell
 cd .. # If you still inside mmyolo
 
-pip install -e .
+pip install -e . # If you want editabe
 ```
 ## ✅ Quick Start / Usage
 
