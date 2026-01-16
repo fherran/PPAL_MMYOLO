@@ -297,7 +297,7 @@ def run(round, run_al):
         )
 
     train_command = 'torchrun --nproc_per_node=%d --master_port=%d ' % (int(cfg.get('gpus')), int(cfg.get('port'))) + \
-                    ' tools/train_mmengine.py ' + \
+                    ' tools/train.py ' + \
                     ' %s ' % cfg.get('train_config') + \
                     ' --work-dir %s ' % round_work_dir + \
                     ' --launcher pytorch ' + \
@@ -355,7 +355,7 @@ def run(round, run_al):
             f' {evaluator_annfile_cfgopts(cfg, "test_evaluator", oracle_path)}'
         )
     eval_command = 'torchrun --nproc_per_node=%d --master_port=%d ' % (int(cfg.get('gpus')), int(cfg.get('port'))) + \
-                   ' tools/test_mmengine.py ' + \
+                   ' tools/test.py ' + \
                    ' %s ' % cfg.get('train_config') + \
                    ' %s ' % latest_ckpt + \
                    ' --work-dir %s ' % round_work_dir + \
@@ -372,7 +372,7 @@ def run(round, run_al):
     if run_al:
         # Unlabeled Inference Command
         unlabeled_infer_command = 'torchrun --nproc_per_node=%d --master_port=%d ' % (int(cfg.get('gpus')), int(cfg.get('port'))) + \
-                                  ' tools/test_mmengine.py ' + \
+                                  ' tools/test.py ' + \
                                   ' %s ' % cfg.get('uncertainty_infer_config') + \
                                   ' %s ' % latest_ckpt + \
                                   ' --work-dir %s ' % round_work_dir + \
@@ -429,7 +429,7 @@ def run(round, run_al):
         else: head = 'bbox_head'
 
         diversity_infer_command = 'torchrun --nproc_per_node=%d --master_port=%d ' % (int(cfg.get('gpus')), int(cfg.get('port'))) + \
-                                  ' tools/test_mmengine.py ' + \
+                                  ' tools/test.py ' + \
                                   ' %s ' % cfg.get('diversity_infer_config') + \
                                   ' %s ' % latest_ckpt + \
                                   ' --work-dir %s ' % round_work_dir + \
