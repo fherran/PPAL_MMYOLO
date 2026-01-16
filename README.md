@@ -54,18 +54,24 @@ You need to copy the custom yolo hooks via this command:
 ```bash
 cp yolo_custom_hooks/yolo_style_metrics_hook.py mmyolo/mmyolo/engine/hooks/
 ```
-And update the python code mmyolo/mmyolo/engine/hooks/__init__.py as follwos:
-```shell
+Add `YoloStyleMetricsHook` to the MMYOLO engine hooks registry.
+
+**File:** `mmyolo/mmyolo/engine/hooks/__init__.py`
+
+```python
 # Copyright (c) OpenMMLab. All rights reserved.
 from .ppyoloe_param_scheduler_hook import PPYOLOEParamSchedulerHook
 from .switch_to_deploy_hook import SwitchToDeployHook
-from .yolo_style_metrics_hook import YoloStyleMetricsHook # Newly added
+from .yolo_style_metrics_hook import YoloStyleMetricsHook  # Newly added
 from .yolov5_param_scheduler_hook import YOLOv5ParamSchedulerHook
 from .yolox_mode_switch_hook import YOLOXModeSwitchHook
 
 __all__ = [
-    'YOLOv5ParamSchedulerHook', 'YOLOXModeSwitchHook', 'SwitchToDeployHook',
-    'PPYOLOEParamSchedulerHook', 'YoloStyleMetricsHook'
+    'YOLOv5ParamSchedulerHook',
+    'YOLOXModeSwitchHook',
+    'SwitchToDeployHook',
+    'PPYOLOEParamSchedulerHook',
+    'YoloStyleMetricsHook'
 ]
 ```
 
